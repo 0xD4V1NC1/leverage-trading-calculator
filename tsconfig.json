@@ -26,6 +26,7 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": [
     "hardhat.config.ts",
-    "node_modules"
+    "node_modules",
+    "tailwind.config.js"
   ],
 }

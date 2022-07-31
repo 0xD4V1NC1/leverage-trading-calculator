@@ -4,3 +4,4 @@ cache
 coverage
 /interfaces
 hardat.config.ts
+tailwind.config.js
