@@ -46,13 +46,12 @@ const MobileNav = () => {
 
   return (
     <>
-      <div id="mobile-nav-header" className="flex justify-between px-8 py-2 md:hidden">
+      <div id="mobile-nav-header" className="h-full grid grid-cols-3 px-8 py-2 items-center md:hidden">
         <DarkModeToggle />
         <Link href="/">
-          {/* <Logo formattedClassName='w-12 h-12' gradient gradientId='mobile-logo' /> */}
-          <h2>Logo was here</h2>
+          <h2 className="font-semibold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500">Calculator</h2>
         </Link>
-        <Button
+        {/* <Button
           type="button"
           ariaLabel="Open Mobile Side Menu"
           onClick={() => setIsOverlayOpen(true)}
@@ -60,7 +59,7 @@ const MobileNav = () => {
           icon={{
             name: 'menu-3', size: '2xlarge', color: 'black', position: 'none',
           }}
-        />
+        /> */}
       </div>
       {/* The Mobile Menu Options is outside of the nav header b/c with justify-between and flex...
       it would move the button over */}

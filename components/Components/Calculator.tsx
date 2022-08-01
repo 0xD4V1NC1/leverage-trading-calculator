@@ -15,6 +15,7 @@ const CalculatorSchema = Yup.object().shape({
   leverage: Yup.number().typeError('you must specify a number').required('This field is required'),
 });
 
+// const FormLabel = () => ();
 const Calculator = () => {
   const [results, setResults] = useState<number>(0);
   const sectionGroupClasses = 'grid grid-col-2 mb-4';
@@ -26,8 +27,6 @@ const Calculator = () => {
     console.log('values:', values);
     const total = values['entry-price'] + values['exit-price'];
     setResults(total);
-    // alert(JSON.stringify(values, null, 2));
-    alert(total);
   };
   return (
     <div className="flex flex-col w-full">
@@ -42,7 +41,7 @@ const Calculator = () => {
         onSubmit={(values) => handleCalculate(values)}
         validationSchema={CalculatorSchema}
       >
-        <Form className="flex flex-col justify-center bg-green-400 p-4 rounded-lg w-1/2">
+        <Form className="flex flex-col justify-center bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] p-4 rounded-lg mx-auto w-4/5 md:w-1/2">
           <div id="direction-group" className={sectionGroupClasses}>
             <label className={labelClasses} htmlFor="direction">
               Direction
@@ -100,11 +99,11 @@ const Calculator = () => {
           </div>
 
           <div className="mt-8 flex justify-center">
-            <Button type="submit" className="py-2 px-4" text="Calculate" ariaLabel="calculate" color="primary" />
+            <Button type="submit" className="py-2 px-4 animate-bounce" text="Calculate" ariaLabel="calculate" color="primary" />
           </div>
         </Form>
       </Formik>
-      <div className="text-3xl font-bold text-blue-400">
+      <div className="text-3xl font-bold text-blue-400 mx-auto pt-8">
         <p>
           Results:
           {' '}

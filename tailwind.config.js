@@ -25,7 +25,7 @@ module.exports = {
         },
         'primary-dark': {
           400: '#353839',
-          500: '#121212',
+          500: '#000',
         },
         'secondary': {
           500: '#C5FF5C',
