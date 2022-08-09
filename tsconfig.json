@@ -23,10 +23,11 @@
     "incremental": true,
 
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","scripts/sitemap-generator.js"],
   "exclude": [
     "hardhat.config.ts",
     "node_modules",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "next.config.js"
   ],
 }

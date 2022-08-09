@@ -5,3 +5,5 @@ coverage
 /interfaces
 hardat.config.ts
 tailwind.config.js
+/scripts/sitemap-generator.js
+next.config.js
