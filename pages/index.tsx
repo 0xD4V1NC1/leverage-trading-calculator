@@ -15,7 +15,17 @@ const Home: NextPage = () => (
           <Calculator />
         </div>
       </Container>
+      <footer>
+        <p className="mt-8 text-center text-gray-600 dark:text-gray-400 text-xs">
+          For feature requests, please email me at
+          {' '}
+          <a href="mailto:0xD4V1NC1@gmail.com" className="hover:text-primary-400"> 0xD4V1NC1@gmail.com</a>
+          {' '}
+        </p>
+        <div className="mt-4 text-center text-gray-600 dark:text-gray-400 text-xs">© 0xD4V1NC1 All rights reserved. Crafted by 0xD4V1NC1</div>
+      </footer>
     </div>
+
   </Layout>
 
 );

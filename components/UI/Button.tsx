@@ -28,7 +28,7 @@ const Button = ({
   switch (color) {
     case 'primary':
       btnBgColor = 'bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500';
-      btnBgColorHover = 'hover:animate-pulse';
+      btnBgColorHover = 'hover:bg-rainbow hover:animate-rainbow';
       btnTextColor = 'text-white';
       break;
     case 'primary-dark':

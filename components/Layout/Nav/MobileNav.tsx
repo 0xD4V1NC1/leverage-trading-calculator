@@ -8,6 +8,7 @@ import Overlay from '../../UI/Overlay';
 import DarkModeToggle from '../../Components/DarkModeToggle';
 
 import nav from './nav.enum';
+import Logo from '../../UI/icons/logo';
 
 const MobileMenuOptions = ({
   isOverlayOpen,
@@ -49,7 +50,7 @@ const MobileNav = () => {
       <div id="mobile-nav-header" className="h-full grid grid-cols-3 px-8 py-2 items-center md:hidden">
         <DarkModeToggle />
         <Link href="/">
-          <h2 className="font-semibold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500">Calculator</h2>
+          <Logo formattedClassName="z-20 w-8 h-8" />
         </Link>
         {/* <Button
           type="button"
