@@ -119,7 +119,7 @@ const Calculator = () => {
 
           <div id="willing-to-risk-in-dollar-group" className={sectionGroupClasses}>
             <label className={labelClasses} htmlFor="willingToRiskPercentage">
-              Willing to Risk (in $)
+              Willing to Risk (in %)
             </label>
             <Field className={fieldClasses} id="willingToRiskPercentage" name="willingToRiskPercentage" type="number" />
             <ErrorMessage
@@ -151,7 +151,7 @@ const Calculator = () => {
 
           <div id="risk-to-reward-ratio-group" className={sectionGroupClasses}>
             <label className={labelClasses} htmlFor="riskToRewardRatio">
-              Risk to Reward Ratio (ex: 2:1)
+              Risk to Reward Ratio (i.e. 2 : 1)
             </label>
             <Field className={fieldClasses} id="riskToRewardRatio" name="riskToRewardRatio" type="number" />
             <ErrorMessage
@@ -166,7 +166,7 @@ const Calculator = () => {
           </div>
         </Form>
       </Formik>
-      <div className="text-3xl font-bold text-blue-400 mx-auto pt-8">
+      <div className="text-xl md:text-3xl font-bold text-blue-400 mx-auto pt-8">
         <p>
           Stop Lost:
           {' '}
