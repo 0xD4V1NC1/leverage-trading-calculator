@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Logo = ({ formattedClassName }: { formattedClassName?: string }) => (
-  <svg className={formattedClassName || 'w-8 h-8'} viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <svg className={formattedClassName || 'w-8 h-8'} viewBox="0 0 512 512" version="1.1" xmlns="https://www.w3.org/2000/svg">
     <defs>
       <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="122.224754%" id="radialGradient-1">
         <stop stopColor="#C5FF5C" offset="0%" />

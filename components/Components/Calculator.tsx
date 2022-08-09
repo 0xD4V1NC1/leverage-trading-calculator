@@ -153,7 +153,7 @@ const Calculator = () => {
             <label className={labelClasses} htmlFor="riskToRewardRatio">
               Risk to Reward Ratio (ex: 2:1)
             </label>
-            <Field className={fieldClasses} id="riskToReward" name="riskToRewardRatio" type="number" />
+            <Field className={fieldClasses} id="riskToRewardRatio" name="riskToRewardRatio" type="number" />
             <ErrorMessage
               component="a"
               className={errorMsgClasses}
