@@ -78,10 +78,8 @@ const Calculator = () => {
       setAssetPercentIncrease(percentIncreaseNeeded);
     }
   };
-  // @TODO remove that p tag
   return (
     <div className="flex flex-col w-full">
-      <p> STAGING TEST</p>
       <Formik
         initialValues={{
           direction: 'long',
