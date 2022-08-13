@@ -54,7 +54,7 @@ const Calculator = () => {
   const sectionGroupClasses = 'grid grid-col-2 mb-4';
   const labelClasses = 'text-2xl text-semibold text-black dark:text-white mr-4 mb-4';
   const fieldClasses = 'rounded-lg p-2';
-  const errorMsgClasses = 'text-red-500';
+  const errorMsgClasses = 'text-red-700 dark:text-red-500';
   // const tradeDirection = isLong ? 'long' : 'short';
 
   const doCalculations = (values:any) => {
@@ -137,9 +137,9 @@ const Calculator = () => {
                   <div className={`${isLong ? 'bg-green-500 text-black dark:text-white w-6/12' : 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12'} rounded-l-lg py-2`}>
                     <p>Long</p>
                   </div>
-                  <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 border-l-[20px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
+                  <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 border-l-[20px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 dark:border-r-red-700 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
 
-                  <div className={`${isLong ? 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12' : 'bg-red-500 text-black dark:text-white w-6/12'} rounded-r-lg py-2`}>
+                  <div className={`${isLong ? 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12' : 'bg-red-500 dark:bg-red-700 text-black dark:text-white w-6/12'} rounded-r-lg py-2`}>
                     <p>Short</p>
                   </div>
                 </button>
@@ -212,11 +212,11 @@ const Calculator = () => {
       <div className="text-lg md:text-2xl font-bold text-black dark:text-white mx-auto p-8 bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] rounded-lg mt-8 w-4/5 md:w-1/2">
         <Result text="Stop Lost:" number={stopPrice} />
         <Result text="Take Profit:" number={takeProfit} />
-        <Result text="Max Possible Lost:" number={maxLost} numberClasses="text-red-500" />
-        <Result text="Max Possible Profit:" number={maxProfit} numberClasses="text-green-500" />
+        <Result text="Max Possible Lost:" number={maxLost} numberClasses="text-red-700 dark:text-red-500" />
+        <Result text="Max Possible Profit:" number={maxProfit} numberClasses="text-green-700 dark:text-green-500" />
         {isLong ? (
-          <Result text="Percent Increase Needed: " number={assetPercentChange} numberClasses="text-green-500" isPercent />
-        ) : <Result text="Percent Decrease Needed: " number={assetPercentChange} numberClasses="text-red-500" isPercent />}
+          <Result text="Percent Increase Needed: " number={assetPercentChange} numberClasses="text-green-700 dark:text-green-500" isPercent />
+        ) : <Result text="Percent Decrease Needed: " number={assetPercentChange} numberClasses="text-red-700 dark:text-red-500" isPercent />}
       </div>
     </div>
   );

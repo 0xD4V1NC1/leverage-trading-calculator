@@ -27,7 +27,7 @@ const Button = ({
   let btnTextColor = 'text-white';
   switch (color) {
     case 'primary':
-      btnBgColor = 'bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500';
+      btnBgColor = 'bg-gradient-to-br from-secondary-500 via-primary-400 to-primary-400';
       btnBgColorHover = 'hover:bg-rainbow hover:animate-rainbow';
       btnTextColor = 'text-white';
       break;
