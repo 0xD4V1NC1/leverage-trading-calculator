@@ -25,7 +25,6 @@ const Home: NextPage = () => (
         <div className="mt-4 text-center text-gray-600 dark:text-gray-400 text-xs">© 0xD4V1NC1 All rights reserved. Crafted by 0xD4V1NC1</div>
       </footer>
     </div>
-
   </Layout>
 
 );

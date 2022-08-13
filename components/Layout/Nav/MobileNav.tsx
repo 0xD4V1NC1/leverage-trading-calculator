@@ -50,7 +50,9 @@ const MobileNav = () => {
       <div id="mobile-nav-header" className="h-full grid grid-cols-3 px-8 py-2 items-center md:hidden">
         <DarkModeToggle />
         <Link href="/">
-          <Logo formattedClassName="z-20 w-8 h-8" />
+          <div className="h-full flex justify-center items-center hover:bg-primary-400 hover:cursor-pointer">
+            <Logo gradientId="mobile-nav-logo" />
+          </div>
         </Link>
         {/* <Button
           type="button"
