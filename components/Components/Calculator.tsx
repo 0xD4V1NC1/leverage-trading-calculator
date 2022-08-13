@@ -10,72 +10,72 @@ type Direction = 'short' | 'long';
 
 const CalculatorSchema = Yup.object().shape({
   direction: Yup.mixed<Direction>().oneOf(['short', 'long']).required('This field is required'),
-  collateral: Yup.number().typeError('you must specify a number').required('This field is required'),
-  currentPrice: Yup.number().typeError('you must specify a number').required('This field is required'),
-  willingToRiskPercentage: Yup.number().typeError('you must specify a number').required('This field is required'),
-  leverage: Yup.number().typeError('you must specify a number').required('This field is required'),
-  riskToRewardRatio: Yup.number().typeError('you must specify a number').required('This field is required'),
+  collateral: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
+  currentPrice: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
+  willingToRiskPercentage: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
+  leverage: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
+  riskToRewardRatio: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
 });
 
 // const FormLabel = () => ();
-// Current Price, Total Collateral, Willing to Risk $$, Risk/Reward Ratio, Leverage, Direction
+const Result = ({ text, number, isPercent }: { text: string, number: any, isPercent?: boolean }) => (
+  <div className="flex">
+    <p className="">{text}</p>
+    <p className="">
+      &nbsp;
+      {number.toFixed(2)}
+      {isPercent ? '%' : ''}
+    </p>
+  </div>
+);
 
-/*
- 1000 (CP)
- 100 (collateral)
- 10 (WTR)
- 2.0 (R/R)
-40 (Leverage)
-Long (direction)
-
-const totalShares = (Collateral x Leverage)/(CP)... ( (40 * 100) / 1000 = 4)
-const percentToRisk = wtr/collateral ... (10/100 = .1 aka 10%)
-
- (CP - WTR) * totalShares = 3960
-*/
 const Calculator = () => {
-  // const [results, setResults] = useState<number>(0);
   const [stopPrice, setStopPrice] = useState<number>(0);
   const [takeProfit, setTakeProfit] = useState<number>(0);
   const [maxLost, setMaxLost] = useState<number>(0);
   const [maxProfit, setMaxProfit] = useState<number>(0);
-  const [assetPercentIncrease, setAssetPercentIncrease] = useState<number>(0);
+  const [assetPercentChange, setAssetPercentChange] = useState<number>(0);
   const [tradeDirection, setTradeDirection] = useState<Direction>('long');
-  // const [assetPercentDecrease, setAssetPercentDecrease] = useState<number>(0);
 
   const sectionGroupClasses = 'grid grid-col-2 mb-4';
   const labelClasses = 'text-2xl text-semibold text-black dark:text-white mr-4';
   const fieldClasses = 'rounded-lg p-2';
   const errorMsgClasses = 'text-red-500';
-  // @TODO remove dependency of other changable vars... work on shorting direction
-  const doMath = (values:any) => {
-    console.log('values:', values);
+
+  const doCalculations = (values:any) => {
     const {
       direction, collateral, willingToRiskPercentage, currentPrice, leverage, riskToRewardRatio,
     } = values; // long, 100, $10 or 10%, 1000, 40, 2
     setTradeDirection(direction);
 
-    if (direction === 'long') {
-      const totalDollarValue = (collateral * leverage); // 4000
-      const sharesCanBuy = (collateral * leverage) / currentPrice; // 4 shares
-      const liquidationPrice = (totalDollarValue - collateral) / sharesCanBuy; // should be ~975
-      const perPercentRate = (currentPrice - liquidationPrice) / 100; // divided by 100 b/c 100%... in example should be .25 per 1% leverage gain
+    const totalDollarValue = (collateral * leverage); // 4000
+    const sharesCanBuy = (collateral * leverage) / currentPrice; // 4 shares
+    const liquidationPrice = (totalDollarValue - collateral) / sharesCanBuy; // should be ~975
+    const perPercentRate = (currentPrice - liquidationPrice) / 100; // divided by 100 b/c 100%... in example should be .25 per 1% leverage gain
+    const maxPossibleLost = collateral * (willingToRiskPercentage / 100);
+    const maxPossibleProfit = maxPossibleLost * riskToRewardRatio;
 
+    if (direction === 'long') {
       const stopLostPrice = currentPrice - (willingToRiskPercentage * perPercentRate); // 997.5 --> which would be a $10 and 10% lost... (@TODO is this dollar or percent?)
       const targetProfit = (willingToRiskPercentage * riskToRewardRatio); // WTR $10 and RtR is 2... so 10 * 2
       const takeProfitPrice = currentPrice + (targetProfit * perPercentRate);
-
-      const maxPossibleLost = (totalDollarValue) - (stopLostPrice * leverage);
-      console.log('tdv', totalDollarValue, stopLostPrice, leverage);
-      const maxPossibleProfit = maxPossibleLost * riskToRewardRatio;
-
       const percentIncreaseNeeded = ((takeProfitPrice - currentPrice) / currentPrice) * 100;
 
       setTakeProfit(takeProfitPrice);
       setStopPrice(stopLostPrice);
       setMaxLost(maxPossibleLost);
       setMaxProfit(maxPossibleProfit);
-      setAssetPercentIncrease(percentIncreaseNeeded);
+      setAssetPercentChange(percentIncreaseNeeded);
+    } else if (direction === 'short') {
+      const stopLostPrice = currentPrice + (willingToRiskPercentage * perPercentRate); // 997.5 --> which would be a $10 and 10% lost... (@TODO is this dollar or percent?)
+      const targetProfit = (willingToRiskPercentage * riskToRewardRatio); // WTR $10 and RtR is 2... so 10 * 2
+      const takeProfitPrice = currentPrice - (targetProfit * perPercentRate);
+      const percentDecreaseNeeded = ((currentPrice - takeProfitPrice) / currentPrice) * 100;
+      setTakeProfit(takeProfitPrice);
+      setStopPrice(stopLostPrice);
+      setMaxLost(maxPossibleLost);
+      setMaxProfit(maxPossibleProfit);
+      setAssetPercentChange(percentDecreaseNeeded);
     }
   };
   return (
@@ -89,7 +89,7 @@ const Calculator = () => {
           leverage: 0,
           riskToRewardRatio: 0,
         }}
-        onSubmit={(values) => doMath(values)}
+        onSubmit={(values) => doCalculations(values)}
         validationSchema={CalculatorSchema}
       >
         <Form className="flex flex-col justify-center bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] p-4 rounded-lg mx-auto w-4/5 md:w-1/2 border-[1px] border-black dark:border-white">
@@ -167,34 +167,13 @@ const Calculator = () => {
         </Form>
       </Formik>
       <div className="text-xl md:text-3xl font-bold text-blue-400 mx-auto pt-8">
-        <p>
-          Stop Lost:
-          {' '}
-          {stopPrice}
-        </p>
-        <p>
-          Take Profit:
-          {' '}
-          {takeProfit}
-        </p>
-        <p>
-          Max Possible Lost: $
-          {' '}
-          {maxLost}
-        </p>
-        <p>
-          Max Possible Profit: $
-          {' '}
-          {maxProfit}
-        </p>
+        <Result text="Stop Lost: $" number={stopPrice} />
+        <Result text="Take Profit: $" number={takeProfit} />
+        <Result text="Max Possible Lost: $" number={maxLost} />
+        <Result text="Max Possible Profit: $" number={maxProfit} />
         {tradeDirection === 'long' ? (
-          <p>
-            Percent Increase Needed:
-            {' '}
-            {assetPercentIncrease}
-            %
-          </p>
-        ) : <p> Percent Decrease Needed: </p>}
+          <Result text="Percent Increase Needed: " number={assetPercentChange} isPercent />
+        ) : <Result text="Percent Decrease Needed: " number={assetPercentChange} isPercent />}
       </div>
     </div>
   );
