@@ -3,9 +3,11 @@ import type { NextPage } from 'next';
 import Layout from '../components/Layout/Layout';
 import Container from '../components/UI/Container';
 import Calculator from '../components/Components/Calculator';
+import Seo from '../components/Components/SEO';
 
 const Home: NextPage = () => (
   <Layout noFooter>
+    <Seo />
     <div className="min-h-screen bg-white dark:bg-primary-dark-500">
       <Container>
         <div className="pt-8">
