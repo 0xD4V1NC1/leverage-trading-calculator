@@ -50,7 +50,6 @@ const Calculator = () => {
   const [maxProfit, setMaxProfit] = useState<number>(0);
   const [assetPercentChange, setAssetPercentChange] = useState<number>(0);
   const [isLong, setIsLong] = useState<boolean>(false);
-
   const sectionGroupClasses = 'grid grid-col-2 mb-4';
   const labelClasses = 'text-2xl text-semibold text-black dark:text-white mr-4 mb-4';
   const fieldClasses = 'rounded-lg p-2';
@@ -94,7 +93,6 @@ const Calculator = () => {
     }
   };
 
-  console.log('isLong', isLong);
   return (
     <div className="flex flex-col w-full">
       <Formik
@@ -107,12 +105,11 @@ const Calculator = () => {
           riskToRewardRatio: 0,
         }}
         onSubmit={(values) => {
-          console.log('shit was submitted');
           doCalculations(values);
         }}
         validationSchema={CalculatorSchema}
       >
-        {({ setFieldValue, values }) => (
+        {({ setFieldValue }) => (
           <Form className="flex flex-col justify-center bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] p-4 rounded-lg mx-auto w-4/5 md:w-1/2">
 
             <div id="direction-group" className={sectionGroupClasses}>
@@ -121,17 +118,7 @@ const Calculator = () => {
                 <button
                   type="button"
                   name="direction"
-                  // @TODO talk to Tim... why do i have to do inverse logic for this to work... well kinda work
-                  value={isLong ? 'short' : 'long'}
-                  onClick={(e) => {
-                    const { value } = e.target as HTMLTextAreaElement;
-                    console.log('toggle clicked');
-                    console.log('value', value);
-                    console.log('direction', values.direction);
-
-                    setIsLong(!isLong);
-                    setFieldValue('direction', value);
-                  }}
+                  onClick={() => setIsLong(!isLong)}
                   className="flex w-full font-bold rounded-lg"
                 >
                   <div className={`${isLong ? 'bg-green-500 dark:bg-green-700 text-black dark:text-white w-6/12' : 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12'} rounded-l-lg py-2`}>
@@ -203,7 +190,16 @@ const Calculator = () => {
             </div>
 
             <div className="mt-8 flex justify-center">
-              <Button type="submit" className="py-2 px-4 animate-pulse" text="Calculate" ariaLabel="calculate" color="primary" />
+              <Button
+                type="submit"
+                className="py-2 px-4 animate-pulse"
+                text="Calculate"
+                ariaLabel="calculate"
+                color="primary"
+                onClick={() => {
+                  setFieldValue('direction', isLong ? 'long' : 'short');
+                }}
+              />
             </div>
           </Form>
         )}
