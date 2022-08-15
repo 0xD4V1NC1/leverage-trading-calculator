@@ -46,7 +46,7 @@ const DirectionToggle = ({
           <div className={`${isLong ? 'bg-green-500 dark:bg-green-700 text-black dark:text-white w-6/12' : 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12'} rounded-l-lg py-2`}>
             <p>Long</p>
           </div>
-          <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 dark:border-l-green-700 border-l-[2px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 dark:border-r-red-700 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
+          <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 dark:border-l-green-700 border-l-[20px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 dark:border-r-red-700 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
 
           <div className={`${isLong ? 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12' : 'bg-red-500 dark:bg-red-700 text-black dark:text-white w-6/12'} rounded-r-lg py-2`}>
             <p>Short</p>
@@ -62,7 +62,7 @@ const Calculator = () => {
   const [maxLost, setMaxLost] = useState<number>(0);
   const [maxProfit, setMaxProfit] = useState<number>(0);
   const [assetPercentChange, setAssetPercentChange] = useState<number>(0);
-  const [isLong, setIsLong] = useState<boolean>(false);
+  const [isLong, setIsLong] = useState<boolean>(true);
   const sectionGroupClasses = 'grid grid-col-2 mb-4';
   const labelClasses = 'text-2xl text-semibold text-black dark:text-white mr-4 mb-4';
   const fieldClasses = 'rounded-lg p-2';
