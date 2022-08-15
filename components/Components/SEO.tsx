@@ -5,7 +5,7 @@ const DOMAIN = 'https://www.leveragetradingcalculator.com';
 
 export default function Seo({
   title = 'Calculator',
-  description = 'Leverage Trading Calculator is a simple calculator to help you estimate entry and exit points of a leveraged trade.',
+  description = 'Leverage Trading Calculator is a simple calculator to help you estimate entry and exit points of a leveraged trade. This is often used as a crypto profit calculator',
   siteName = 'Leverage Trading Calculator',
   canonical = DOMAIN,
   twitterHandle = '@0xD4V1NC1',
