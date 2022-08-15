@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import {
   Formik, Field, Form, ErrorMessage,
@@ -10,7 +9,6 @@ type Direction = 'short' | 'long';
 
 const CalculatorSchema = Yup.object().shape({
   direction: Yup.mixed<Direction>().oneOf(['short', 'long']).required('This field is required'),
-  // isLongTrade: Yup.boolean().required('This field is required'),
   collateral: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
   currentPrice: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
   willingToRiskPercentage: Yup.number().positive().typeError('you must specify a number').required('This field is required'),
@@ -32,16 +30,31 @@ const Result = ({
   </div>
 );
 
-/* <div id="direction-group" className={sectionGroupClasses}>
-          <label className={labelClasses} htmlFor="direction">
-            Direction
-          </label>
-          <Field className={fieldClasses} as="select" name="direction">
-            <option value="short">Short</option>
-            <option value="long">Long</option>
-          </Field>
-          <ErrorMessage component="a" className={errorMsgClasses} name="direction" />
-        </div> */
+const DirectionToggle = ({
+  sectionGroupClasses, labelClasses, isLong, setIsLong,
+} : { sectionGroupClasses: string,
+  labelClasses: string, isLong:boolean, setIsLong: (isLong:boolean) => void }) => (
+    <div id="direction-group" className={sectionGroupClasses}>
+      <label className={labelClasses} htmlFor="direction"> Trade Direction </label>
+      <div className="flex w-full">
+        <button
+          type="button"
+          name="direction"
+          onClick={() => setIsLong(!isLong)}
+          className="flex w-full font-bold rounded-lg"
+        >
+          <div className={`${isLong ? 'bg-green-500 dark:bg-green-700 text-black dark:text-white w-6/12' : 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12'} rounded-l-lg py-2`}>
+            <p>Long</p>
+          </div>
+          <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 dark:border-l-green-700 border-l-[2px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 dark:border-r-red-700 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
+
+          <div className={`${isLong ? 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12' : 'bg-red-500 dark:bg-red-700 text-black dark:text-white w-6/12'} rounded-r-lg py-2`}>
+            <p>Short</p>
+          </div>
+        </button>
+      </div>
+    </div>
+);
 
 const Calculator = () => {
   const [stopPrice, setStopPrice] = useState<number>(0);
@@ -54,24 +67,22 @@ const Calculator = () => {
   const labelClasses = 'text-2xl text-semibold text-black dark:text-white mr-4 mb-4';
   const fieldClasses = 'rounded-lg p-2';
   const errorMsgClasses = 'text-red-700 dark:text-red-500';
-  // const tradeDirection = isLong ? 'long' : 'short';
 
   const doCalculations = (values:any) => {
-    console.log('Values (doCalculations): ', values);
     const {
       direction, collateral, willingToRiskPercentage, currentPrice, leverage, riskToRewardRatio,
     } = values;
 
-    const totalDollarValue = (collateral * leverage); // 4000
-    const sharesCanBuy = (collateral * leverage) / currentPrice; // 4 shares
-    const liquidationPrice = (totalDollarValue - collateral) / sharesCanBuy; // should be ~975
-    const perPercentRate = (currentPrice - liquidationPrice) / 100; // divided by 100 b/c 100%... in example should be .25 per 1% leverage gain
+    const totalDollarValue = (collateral * leverage);
+    const sharesCanBuy = (collateral * leverage) / currentPrice;
+    const liquidationPrice = (totalDollarValue - collateral) / sharesCanBuy;
+    const perPercentRate = (currentPrice - liquidationPrice) / 100;
     const maxPossibleLost = collateral * (willingToRiskPercentage / 100);
     const maxPossibleProfit = maxPossibleLost * riskToRewardRatio;
 
     if (direction === 'long') {
-      const stopLostPrice = currentPrice - (willingToRiskPercentage * perPercentRate); // 997.5 --> which would be a $10 and 10% lost... (@TODO is this dollar or percent?)
-      const targetProfit = (willingToRiskPercentage * riskToRewardRatio); // WTR $10 and RtR is 2... so 10 * 2
+      const stopLostPrice = currentPrice - (willingToRiskPercentage * perPercentRate);
+      const targetProfit = (willingToRiskPercentage * riskToRewardRatio);
       const takeProfitPrice = currentPrice + (targetProfit * perPercentRate);
       const percentIncreaseNeeded = ((takeProfitPrice - currentPrice) / currentPrice) * 100;
 
@@ -81,8 +92,8 @@ const Calculator = () => {
       setMaxProfit(maxPossibleProfit);
       setAssetPercentChange(percentIncreaseNeeded);
     } else {
-      const stopLostPrice = currentPrice + (willingToRiskPercentage * perPercentRate); // 997.5 --> which would be a $10 and 10% lost... (@TODO is this dollar or percent?)
-      const targetProfit = (willingToRiskPercentage * riskToRewardRatio); // WTR $10 and RtR is 2... so 10 * 2
+      const stopLostPrice = currentPrice + (willingToRiskPercentage * perPercentRate);
+      const targetProfit = (willingToRiskPercentage * riskToRewardRatio);
       const takeProfitPrice = currentPrice - (targetProfit * perPercentRate);
       const percentDecreaseNeeded = ((currentPrice - takeProfitPrice) / currentPrice) * 100;
       setTakeProfit(takeProfitPrice);
@@ -112,26 +123,12 @@ const Calculator = () => {
         {({ setFieldValue }) => (
           <Form className="flex flex-col justify-center bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] p-4 rounded-lg mx-auto w-4/5 md:w-1/2">
 
-            <div id="direction-group" className={sectionGroupClasses}>
-              <label className={labelClasses} htmlFor="direction"> Trade Direction </label>
-              <div className="flex w-full">
-                <button
-                  type="button"
-                  name="direction"
-                  onClick={() => setIsLong(!isLong)}
-                  className="flex w-full font-bold rounded-lg"
-                >
-                  <div className={`${isLong ? 'bg-green-500 dark:bg-green-700 text-black dark:text-white w-6/12' : 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12'} rounded-l-lg py-2`}>
-                    <p>Long</p>
-                  </div>
-                  <div className={`w-1/12 border-solid ${isLong ? 'border-l-green-500 dark:border-l-green-700 border-l-[20px] border-y-transparent border-y-[20px] border-r-0' : 'border-r-red-500 dark:border-r-red-700 border-r-[20px] border-y-transparent border-y-[20px] border-l-0'} bg-gray-100 dark:bg-[#121212]`} />
-
-                  <div className={`${isLong ? 'bg-gray-100 text-black dark:bg-[#121212] dark:text-white w-5/12' : 'bg-red-500 dark:bg-red-700 text-black dark:text-white w-6/12'} rounded-r-lg py-2`}>
-                    <p>Short</p>
-                  </div>
-                </button>
-              </div>
-            </div>
+            <DirectionToggle
+              isLong={isLong}
+              setIsLong={setIsLong}
+              labelClasses={labelClasses}
+              sectionGroupClasses={sectionGroupClasses}
+            />
 
             <div id="collateral-group" className={sectionGroupClasses}>
               <label className={labelClasses} htmlFor="collateral">
@@ -192,7 +189,7 @@ const Calculator = () => {
             <div className="mt-8 flex justify-center">
               <Button
                 type="submit"
-                className="py-2 px-4 animate-pulse"
+                className="py-2 px-16 animate-pulse"
                 text="Calculate"
                 ariaLabel="calculate"
                 color="primary"
@@ -205,6 +202,7 @@ const Calculator = () => {
         )}
 
       </Formik>
+      {/* Calculated Results Section */}
       <div className="text-lg md:text-2xl font-bold text-black dark:text-white mx-auto p-8 bg-gray-100 dark:bg-[#121212] shadow-2xl dark:shadow-[#222] rounded-lg mt-8 w-4/5 md:w-1/2">
         <Result text="Stop Lost:" number={stopPrice} />
         <Result text="Take Profit:" number={takeProfit} />
