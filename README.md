@@ -7,8 +7,11 @@ I decided to make this project available on the internet to easily access it as 
 
 ## Prerequisites
 If you do not have nodeJS, nvm or yarn installed please checkout these links to install them. 
+
 yarn - `https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable`
+
 nvm - `https://heynode.com/tutorial/install-nodejs-locally-nvm/` or you can install nodeJS version specified in the .nvmrc file
+
 NodeJS - `https://nodejs.org/en/download/`
 
 Although I have specified a specific version of Node in the .nvmrc file and you should use that, I do not think it will make much of a difference if you use a more recent version of Node as this application has a very minimal amount of dependencies.
