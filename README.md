@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Leverage Trading Calculator
+
+## Project Overview
+Leverage Trading Calculator is a NextJS application I built to help me calculate entry and exit points for leveraged crypto trades on decentralized trading platforms such as `Gains.trade` (on Polygon) and `gmx.io/trade` (on Arbitrum). One of the critical aspects of trading assets of any class is always having a plan. This tool allows you to come up with a plan/strategy, and see "what if" scenarios before actually conducting a trade.
+
+I decided to make this project available on the internet to easily access it as well as help others who may be looking for a similar tool as I was but had no luck finding it. Currently this project is hosted with Vercel at the following url: `https://www.leveragetradingcalculator.com/`
+
+## Prerequisites
+If you do not have nodeJS, nvm or yarn installed please checkout these links to install them. 
+yarn - `https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable`
+nvm - `https://heynode.com/tutorial/install-nodejs-locally-nvm/` or you can install nodeJS version specified in the .nvmrc file
+NodeJS - `https://nodejs.org/en/download/`
+
+Although I have specified a specific version of Node in the .nvmrc file and you should use that, I do not think it will make much of a difference if you use a more recent version of Node as this application has a very minimal amount of dependencies.
 
 ## Getting Started
+1. First clone the repository
+2. In the repo's root directory run `nvm use`
+3. Next you will want to install the dependencies with `yarn install`
+4. Now you should be ready to boot the project up with `yarn run dev`
+5. If you wish to run a full build you will first run `yarn build` followed by `yarn start`
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+crafted by 0xD4V1NC1
