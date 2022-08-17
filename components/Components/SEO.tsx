@@ -17,6 +17,9 @@ export default function Seo({
   return (
     <Head>
       <title key="title">{`${title} – ${siteName}`}</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
       <meta name="description" content={description} />
       <meta key="og_title" property="og:title" content={title} />
       <meta key="og_description" property="og:description" content={description} />
@@ -52,9 +55,9 @@ export default function Seo({
         property="twitter:description"
         content={description}
       />
-      {/* <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
-      <meta name="theme-color" content="#FFF" media="(prefers-color-scheme: light)" /> */}
-      <meta name="theme-color" content="#ee8884" />
+      <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
+      <meta name="theme-color" content="#FFF" media="(prefers-color-scheme: light)" />
+      {/* <meta name="theme-color" content="#ee8884" /> */}
       <link rel="canonical" href={canonical ?? DOMAIN} />
 
       <link rel="shortcut icon" href="/favicon.ico" />
