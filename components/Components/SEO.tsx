@@ -55,9 +55,9 @@ export default function Seo({
         property="twitter:description"
         content={description}
       />
-      <meta name="theme-color" content="#00FF00" media="(prefers-color-scheme: dark)" />
+      <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
       <meta name="theme-color" content="#FFF" media="(prefers-color-scheme: light)" />
-      {/* <meta name="theme-color" content="#ee8884" /> */}
+      <meta name="theme-color" content="#B7B0FF" />
       <link rel="canonical" href={canonical ?? DOMAIN} />
 
       <link rel="shortcut icon" href="/favicon.ico" />
